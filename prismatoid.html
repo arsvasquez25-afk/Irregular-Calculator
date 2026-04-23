@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prismatoid — IrregCalc</title>
+  <link rel="stylesheet" href="shared.css">
+  <style>
+    .step {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      margin-bottom: 16px;
+    }
+
+    .step-num {
+      background: var(--green);
+      color: #0c0c10;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.75rem;
+      font-weight: 500;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .step p { font-size: 0.9rem; color: #b0b0c8; line-height: 1.7; }
+    .step strong { color: var(--text); }
+
+    .figure-svg {
+      display: flex;
+      justify-content: center;
+      margin: 8px 0 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAVIGATION ── -->
+  <nav>
+    <a class="nav-logo" href="index.html">Irreg<span>Calc</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Calculator</a></li>
+      <li><a href="frustum-cone.html">Frustum Cone</a></li>
+      <li><a href="frustum-pyramid.html">Frustum Pyramid</a></li>
+      <li><a href="prismatoid.html" class="active">Prismatoid</a></li>
+    </ul>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-tag" style="color:var(--green);border-color:var(--green);">Irregular Solid · 03</div>
+    <h1>The <span style="color:var(--green)">Prismatoid</span></h1>
+    <p>The most general of the three — a solid with two parallel bases of any shape and size, connected by flat or curved faces, with a measurable middle cross-section.</p>
+  </div>
+
+  <div class="wrap">
+
+    <!-- WHAT IS IT -->
+    <div class="section-card">
+      <h2>
+        <span class="icon" style="background:#0f2018;">📐</span>
+        What is a Prismatoid?
+      </h2>
+      <p>
+        A <strong>prismatoid</strong> is the most flexible of the irregular solids. It is defined as any solid that has
+        <strong>two parallel bases</strong> (which can be any polygon, circle, or irregular shape) and whose
+        <strong>lateral faces</strong> are triangles, trapezoids, or parallelograms.
+      </p>
+      <br>
+      <p>
+        What makes it special is the <strong>middle cross-section (Am)</strong> — an imaginary slice taken
+        exactly halfway between the two bases. This middle area is key to the formula.
+        Prisms, pyramids, cones, and frustums are all <em>special cases</em> of a prismatoid.
+      </p>
+
+      <!-- SVG Illustration -->
+      <div class="figure-svg">
+        <svg width="220" height="170" viewBox="0 0 220 170" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Bottom base (wide trapezoid shape) -->
+          <polygon points="15,145 175,145 185,130 25,130" fill="#0f2018" stroke="#5dd8a0" stroke-width="1.5"/>
+          <!-- Left side -->
+          <line x1="15" y1="145" x2="55" y2="82" stroke="#5dd8a0" stroke-width="1.5"/>
+          <line x1="25" y1="130" x2="55" y2="82" stroke="#5dd8a0" stroke-width="1"/>
+          <!-- Right side -->
+          <line x1="175" y1="145" x2="155" y2="82" stroke="#5dd8a0" stroke-width="1.5"/>
+          <line x1="185" y1="130" x2="155" y2="82" stroke="#5dd8a0" stroke-width="1"/>
+          <!-- Middle section (Am) dashed -->
+          <line x1="35" y1="113" x2="170" y2="113" stroke="#7c6dfa" stroke-width="1" stroke-dasharray="5,3"/>
+          <text x="173" y="116" fill="#7c6dfa" font-family="monospace" font-size="10">Am</text>
+          <!-- Top base -->
+          <polygon points="55,82 155,82 148,68 62,68" fill="#0f2018" stroke="#5dd8a0" stroke-width="1.5"/>
+          <!-- Labels -->
+          <text x="70" y="143" fill="#5dd8a0" font-family="monospace" font-size="10">A1 (bottom base)</text>
+          <text x="72" y="64" fill="#e8c46a" font-family="monospace" font-size="10">A2 (top base)</text>
+          <!-- Height -->
+          <line x1="200" y1="68" x2="200" y2="145" stroke="#888899" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="205" y="110" fill="#888899" font-family="monospace" font-size="11">h</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- THE FORMULA -->
+    <div class="section-card">
+      <h2>
+        <span class="icon" style="background:#0f2018;">📐</span>
+        The Formula (Prismoidal / Simpson's Rule)
+      </h2>
+
+      <div class="formula-box" style="border-color:var(--green);color:var(--green);">
+        V = (h/6) × (A1 + A2 + 4 × Am)
+      </div>
+
+      <table class="var-table">
+        <thead>
+          <tr><th>Variable</th><th>Meaning</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>V</td><td>Volume — total space inside the prismatoid</td></tr>
+          <tr><td>h</td><td>Height — total vertical distance between the two bases</td></tr>
+          <tr><td>A1</td><td>Area of the bottom base</td></tr>
+          <tr><td>A2</td><td>Area of the top base</td></tr>
+          <tr><td>Am</td><td>Area of the middle cross-section (a slice exactly at h/2)</td></tr>
+          <tr><td>4 × Am</td><td>The middle is weighted 4× because it has the greatest influence on the volume</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- HOW THE FORMULA WORKS -->
+    <div class="section-card">
+      <h2>
+        <span class="icon" style="background:#0f2018;">🧠</span>
+        How the Formula Works (Step by Step)
+      </h2>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <p>Measure the <strong>bottom area A1</strong> and the <strong>top area A2</strong>. These are the two ends of the solid.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <p>Find the <strong>middle cross-section Am</strong> — cut the solid exactly in half (at height h/2) and measure the area of that slice. This is the most important measurement.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <p>Compute <strong>A1 + A2 + 4·Am</strong>. The middle section is multiplied by 4 because it represents the bulk of the volume — this is borrowed from <em>Simpson's Rule</em> in calculus.</p>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <p>Multiply by <strong>h/6</strong>. Dividing by 6 correctly balances the weighted sum into an accurate volume regardless of the shape of the bases.</p>
+      </div>
+    </div>
+
+    <!-- REAL LIFE SCENARIOS -->
+    <div class="section-card">
+      <h2>
+        <span class="icon" style="background:#1f1a10;">🌍</span>
+        Real-Life Uses
+      </h2>
+
+      <div class="scenario">
+        <div class="scenario-icon">⛰️</div>
+        <div>
+          <h3>Earthwork and Land Surveying</h3>
+          <p>Civil engineers use the prismatoid formula to estimate the volume of soil to be cut or filled when constructing roads, dams, and embankments. The two bases are the start and end cross-sections, and Am is the middle cross-section of the terrain.</p>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scenario-icon">🏊</div>
+        <div>
+          <h3>Swimming Pools and Reservoirs</h3>
+          <p>Irregularly shaped pools that are wider at one end and narrower at the other — with varying depth — are modeled as prismatoids. Engineers calculate water capacity using this formula.</p>
+        </div>
+      </div>
+
+      <div class="scenario">
+        <div class="scenario-icon">🌉</div>
+        <div>
+          <h3>Bridge Abutments</h3>
+          <p>The concrete supports at the ends of a bridge are often prismatoid-shaped. Structural engineers use this formula to calculate the exact volume of concrete needed during construction.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- NAVIGATION -->
+    <div style="display:flex;gap:12px;flex-wrap:wrap;">
+      <a href="index.html" class="btn-cta">Try the Calculator</a>
+      <a href="frustum-cone.html" class="btn-outline">← Back to Frustum Cone</a>
+    </div>
+
+  </div>
+</body>
+</html>
